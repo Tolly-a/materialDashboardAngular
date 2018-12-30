@@ -1,0 +1,73 @@
+<div *ngIf="item; else loader" class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Edit {{item.Name}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="editItemForm" (ngSubmit)="onSubmit()">
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <mat-form-field class="example-full-width">
+                                        <!-- NAME -->
+                                        <input matInput type="text" formControlName="name" placeholder="Name" required>
+                                        <mat-error *ngIf="editItemForm.get('name').invalid && editItemForm.get('name').touched">
+                                            <div *ngIf="editItemForm.get('name').errors['required']">Required field</div>
+                                            <div *ngIf="editItemForm.get('name').errors['maxLength']">Cannot be longer
+                                                than 100 char</div>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <app-date-picker id="FilingDatePicker" name="filingDate" [filingDate]="filingDate"
+                                        name="filingDate" [(ngModel)]="filingDate" [ngModelOptions]="{standalone: true}"
+                                        [allowFutureDates]="false" [required]="false" label="Filing date"
+                                        (dateHasError)='onDatePickerHasError($event)' (newDate)='onDatepikerDate($event)'
+                                        #x="ngModel">
+                                    </app-date-picker>
+                                </div>
+
+                                <!-- DESCRIPTION -->
+                                <div class="col-md-6">
+                                    <mat-form-field class="example-full-width">
+                                        <textarea matInput formControlName="description" placeholder="Description"></textarea>
+                                    </mat-form-field>
+                                </div>
+
+                                <!-- AMOUNT  -->
+                                <div class="col-md-2">
+                                    <mat-form-field class="example-full-width">
+                                        <input matInput type="number" formControlName="amount" placeholder="Amount">
+                                        <mat-error *ngIf="editItemForm.get('amount').invalid && editItemForm.get('amount').touched">
+                                            <div *ngIf="editItemForm.get('amount').errors['max']">No more than 6 digits</div>
+                                        </mat-error>
+                                    </mat-form-field>
+                                </div>
+
+                                <!-- is Private -->
+                                <div class="col-md-2">
+                                    <div class="example-full-width">
+                                        <mat-checkbox class="example-margin" [(ngModel)]="item.IsPrivate"
+                                            [ngModelOptions]="{standalone: true}" (change)="onCheckboxChange($event)">
+                                            Is Private
+                                        </mat-checkbox>
+                                    </div>
+                                </div>
+                            </div>
+                            <button mat-raised-button [disabled]="!editItemForm.valid || datePickerError" type="submit"
+                                class="btn btn-danger pull-right">Save Changes</button>
+                            <button mat-raised-button (click)="cancel()" class="btn btn-default pull-right">Cancel</button>
+                            <div class="clearfix"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #loader>Load ...</ng-template>

@@ -1,0 +1,52 @@
+<div class="card card-stats">
+  <div class="card-header card-header-warning card-header-icon">
+    <div class="card-icon">
+      <i class="material-icons">info</i>
+    </div>
+
+    <h3 class="card-title text-left">Item Details</h3>
+  </div>
+  <div class="card-body">
+    <div *ngIf="!item; else itemDetailsTable">Loading</div>
+    <ng-template #itemDetailsTable>
+      <table *ngIf="item" class='table'>
+        <tbody>
+          <tr>
+            <td>Item Id:</td>
+            <td>{{item.Id}}</td>
+          </tr>
+          <tr>
+            <td>Item Name:</td>
+            <td>{{item.Name}}</td>
+          </tr>
+          <tr>
+            <td>Date:</td>
+            <td>{{item.Date | date: 'dd/MM/yyyy'}}</td>
+          </tr>
+          <tr>
+            <td>Description:</td>
+            <td>{{item.Description}}</td>
+          </tr>
+          <tr>
+            <td>Amount:</td>
+            <td>{{item.Amount}}</td>
+          </tr>
+          <tr>
+            <td>Is Private:</td>
+            <td *ngIf="item.IsPrivate; else public">Private</td>
+            <ng-template #public>
+              <td>Public</td>
+            </ng-template>
+          </tr>
+        </tbody>
+      </table>
+    </ng-template>
+  </div>
+  <div class="card-footer">
+    <div class="stats">
+      <a class="btn btn-danger pull-right" [routerLink]="['/list-items']">
+        Back to Items List
+      </a>
+    </div>
+  </div>
+</div>

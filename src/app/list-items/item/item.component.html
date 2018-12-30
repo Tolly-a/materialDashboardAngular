@@ -1,0 +1,23 @@
+<td *ngIf="item; else loader" class="td-actions text-left">
+    <button mat-raised-button type="button" matTooltip="Details Item" class="btn btn-primary btn-link btn-sm btn-just-icon"
+        [matTooltipPosition]="'above'" [routerLink]="['/item-details', item.Id]">
+        <i class="material-icons">info</i>
+    </button>
+</td>
+<td class="text-primary">{{ item.Name }}</td>
+<td class="text-left">{{ item.Date | date: 'dd/MM/yyyy' }}</td>
+
+<td class="td-actions text-right">
+    <button mat-raised-button type="button" matTooltip="Edit Item" class="btn btn-primary btn-link btn-sm btn-just-icon"
+        [matTooltipPosition]="'above'" (click)="editItem()">
+        <i class="material-icons">edit</i>
+    </button>
+    <button mat-raised-button type="button" matTooltip="Delete Item" class="btn btn-danger btn-link btn-sm btn-just-icon"
+        [matTooltipPosition]="'above'" (click)="openDialog(item)">
+        <i class="material-icons">delete_forever</i>
+    </button>
+</td>
+
+<ng-template #loader>
+    <div>Loading ...</div>
+</ng-template>

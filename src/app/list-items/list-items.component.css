@@ -1,0 +1,16 @@
+.sortable{
+    cursor: pointer;
+}
+.sortable:hover{
+    color: black;
+}
+
+thead th i.material-icons{
+    display: inline-flex;
+    vertical-align: top;
+    margin-left: -9px;
+    margin-right: -4px;
+}
+.custom-title{
+    display: inline-block;
+}

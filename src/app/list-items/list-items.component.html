@@ -1,0 +1,47 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-primary">
+                        <h4 class="card-title custom-title">Simple Table</h4>
+                        <a class="btn btn-white pull-right" [routerLink]="['/create-item']">
+                            Create new item
+                        </a>
+                    </div>
+
+                    <div *ngIf="!items; else dataTable" class="card-body">
+                        <span>Loading data...</span>
+                    </div>
+
+                    <ng-template #dataTable>
+                        <div class="card-body">
+                            <div class="table-responsive">
+
+                                <table class="table">
+                                    <thead class=" text-primary">
+                                        <th>
+                                            <!-- details -->
+                                        </th>
+                                        <th sortColumn [sortKey]="'Name'" [data]="items" sort-direction="asc" class="sortable">
+                                            <i class="material-icons">unfold_more</i> Name
+                                        </th>
+                                        <th sortColumn [sortKey]="'Date'" [data]="items" sort-direction="asc" class="sortable">
+                                            <i class="material-icons">unfold_more</i>Date
+                                        </th>
+                                        <th>
+                                            <!-- delete/update -->
+                                        </th>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of items" app-item [item]="item"></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
